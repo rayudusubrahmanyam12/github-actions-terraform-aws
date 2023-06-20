@@ -21,7 +21,10 @@ jobs:
           aws-region: ap-south-1         
       - name: Check out code
         uses: actions/checkout@v2
-        
+      - name: debugging
+        run: |
+          pwd
+          ls  
       - name: Run Terrascan
         id: terrascan
         uses: accurics/terrascan-action@main
