@@ -12,11 +12,11 @@ module "acme_finance_bucket" {
 }
 
 resource "aws_s3_bucket" "bucket-with-encryption-and-logging" {
-  bucket = "my-passing-bucket"
+  bucket = "saanvi-my-passing-bucket"
 
   logging {
     target_bucket = data.aws_s3_bucket.acme-s3-access-logging.id
-    target_prefix = "my-passing-bucket/logs/"
+    target_prefix = "saanvi-my-passing-bucket/logs/"
   }
 
   server_side_encryption_configuration {
@@ -29,7 +29,7 @@ resource "aws_s3_bucket" "bucket-with-encryption-and-logging" {
 }
 
 resource "aws_s3_bucket" "bucket-with-encryption" {
-  bucket = "my-failing-bucket-no-logging"
+  bucket = "saanvi-my-failing-bucket-no-logging"
 
   server_side_encryption_configuration {
     rule {
@@ -41,21 +41,21 @@ resource "aws_s3_bucket" "bucket-with-encryption" {
 }
 
 resource "aws_s3_bucket" "bucket-with-logging" {
-  bucket = "my-failing-bucket-no-encryption"
+  bucket = "saanvi-my-failing-bucket-no-encryption"
 
   logging {
-    target_prefix = "my-failing-bucket-not-encryption/logs/"
+    target_prefix = "saanvi-my-failing-bucket-not-encryption/logs/"
     target_bucket = data.aws_s3_bucket.acme-s3-access-logging.id
   }
 }
 
 resource "aws_s3_bucket" "bucket-with-encryption-and-logging-but-public" {
-  bucket = "my-public-bucket"
+  bucket = "saanvi-my-public-bucket"
   acl = "public-read"
 
   logging {
     target_bucket = data.aws_s3_bucket.acme-s3-access-logging.id
-    target_prefix = "my-passing-bucket/logs/"
+    target_prefix = "saanvi-my-passing-bucket/logs/"
   }
 
   server_side_encryption_configuration {
