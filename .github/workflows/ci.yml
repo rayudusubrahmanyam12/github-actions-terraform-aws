@@ -116,7 +116,9 @@ jobs:
         with:
           channel: current
           project: inspec
-
+        env:
+          chef_license: accept
+          
       - name: Assume Role
         uses: aws-actions/configure-aws-credentials@v1
         with:
