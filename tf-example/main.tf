@@ -11,8 +11,7 @@ data "aws_ami" "ubuntu" {
         values = ["hvm"]
     }
     
-    owners = ["389028963485"] # Canonical
-}
+ }
 
 provider "aws" {
   region  = "ap-south-1"
