@@ -119,7 +119,7 @@ jobs:
         with:
           aws-region: ap-south-1
           role-to-assume: arn:aws:iam::389028963485:role/my-github-actions-role
-          role-duration-seconds: 600
+          role-duration-seconds: 960
           role-skip-session-tagging: true          
 
       - name: Infrastructure Tests
