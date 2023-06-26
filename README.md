@@ -1,15 +1,67 @@
-# github-actions-terraform-aws
+# Spring Boot based Java web application
+ 
+This is a simple Sprint Boot based Java application that can be built using Maven. Sprint Boot dependencies are handled using the pom.xml 
+at the root directory of the repository.
 
-https://github.com/neillturner/terraform-github-actions
+This is a MVC architecture based application where controller returns a page with title and message attributes to the view.
 
-https://wahlnetwork.com/2020/05/12/continuous-integration-with-github-actions-and-terraform/
+## Execute the application locally and access it using your browser
 
-https://www.hashicorp.com/blog/automate-infrastructure-provisioning-workflows-with-the-github-action-for-terraform
+Checkout the repo and move to the directory
 
-https://docs.github.com/en/actions/learn-github-actions
+```
+git clone https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero/java-maven-sonar-argocd-helm-k8s/sprint-boot-app
+cd java-maven-sonar-argocd-helm-k8s/sprint-boot-app
+```
 
-https://github.com/rayudusubrahmanyam12/github-actions-terraform-aws
+Execute the Maven targets to generate the artifacts
+
+```
+mvn clean package
+```
+
+The above maven target stroes the artifacts to the `target` directory. You can either execute the artifact on your local machine
+(or) run it as a Docker container.
+
+** Note: To avoid issues with local setup, Java versions and other dependencies, I would recommend the docker way. **
 
 
-https://medium.com/everything-full-stack/use-github-actions-and-terraform-to-provision-ec2-instance-5b51636e4e54
+### Execute locally (Java 11 needed) and access the application on http://localhost:8080
+
+```
+java -jar target/spring-boot-web.jar
+```
+
+### The Docker way
+
+Build the Docker Image
+
+```
+docker build -t ultimate-cicd-pipeline:v1 .
+```
+
+```
+docker run -d -p 8010:8080 -t ultimate-cicd-pipeline:v1
+```
+
+Hurray !! Access the application on `http://<ip-address>:8010`
+
+
+## Next Steps
+
+### Configure a Sonar Server locally
+
+```
+apt install unzip
+adduser sonarqube
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.4.0.54424.zip
+unzip *
+chmod -R 755 /home/sonarqube/sonarqube-9.4.0.54424
+chown -R sonarqube:sonarqube /home/sonarqube/sonarqube-9.4.0.54424
+cd sonarqube-9.4.0.54424/bin/linux-x86-64/
+./sonar.sh start
+```
+
+Hurray !! Now you can access the `SonarQube Server` on `http://<ip-address>:9000` 
+
 
