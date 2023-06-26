@@ -127,48 +127,7 @@ jobs:
           role-to-assume: arn:aws:iam::389028963485:role/my-github-actions-role
           role-duration-seconds: 960
           role-skip-session-tagging: true          
-
-      - name: Infrastructure Tests
-        id: inspec
-        run: inspec exec profile/example --reporter=cli:- progress:inspec.log --input-file=profile/example/attributes-example.yml -t aws://
+      - name: Run Snyk to check Kubernetes manifest file for issues
+        uses: snyk/actions/iac@master
         env:
-          chef_license: accept
-          #CHEF_LICENSE: ACCEPT
-          #CHEF_LICENSE: accept
-
-      - name: Infrastructure Test Results 
-        id: inspec_results
-        if: always()
-        run: | 
-          REPORT="$(cat inspec.log)"
-          REPORT="${REPORT//'%'/'%25'}"
-          REPORT="${REPORT//$'\n'/'%0A'}"
-          REPORT="${REPORT//$'\r'/'%0D'}"
-          echo "::set-output name=loginspec::$REPORT"
-
-      - name: Infrastructure tests Output
-        if: always()      
-        uses: actions/github-script@v3
-        env:
-          INSPEC: "Inspec Test Results \n${{ steps.inspec_results.outputs.loginspec }}"
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const output = `#### Inspec Tests 🖌\`${{ steps.inspec.outcome }}\`
-
-            <details><summary>Show Test Results</summary>
-
-            \`\`\`
-
-            ${process.env.INSPEC}
-            \`\`\`
-           
-            </details>
-
-            `;
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
