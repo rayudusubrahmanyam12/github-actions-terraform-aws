@@ -127,8 +127,10 @@ jobs:
           role-to-assume: arn:aws:iam::389028963485:role/my-github-actions-role
           role-duration-seconds: 960
           role-skip-session-tagging: true 
+
       - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=github-actions-terraform-aws -Dsonar.organization=rayudusubrahmanyam12 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+        # uses: sonarsource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}         
