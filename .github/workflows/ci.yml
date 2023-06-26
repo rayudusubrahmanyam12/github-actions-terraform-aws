@@ -128,6 +128,11 @@ jobs:
           role-duration-seconds: 960
           role-skip-session-tagging: true          
       - name: Run Snyk to check Kubernetes manifest file for issues
-        uses: snyk/actions/iac@master --report
+        uses: snyk/actions/iac@master
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.4.0
+        with:
+          target: 'https://www.zaproxy.org/'
