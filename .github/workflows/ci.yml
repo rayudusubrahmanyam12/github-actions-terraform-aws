@@ -117,7 +117,7 @@ jobs:
           channel: current
           project: inspec
         env:
-          CHEF_LICENSE: ACCEPT
+          #CHEF_LICENSE: ACCEPT
           chef_license: accept
           
       - name: Assume Role
@@ -133,7 +133,7 @@ jobs:
         run: inspec exec profile/example --reporter=cli:- progress:inspec.log --input-file=profile/example/attributes-example.yml -t aws://
         env:
           chef_license: accept
-          CHEF_LICENSE: ACCEPT
+          #CHEF_LICENSE: ACCEPT
           #CHEF_LICENSE: accept
 
       - name: Infrastructure Test Results 
