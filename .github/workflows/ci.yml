@@ -129,7 +129,9 @@ jobs:
           role-skip-session-tagging: true 
 
       - name: SonarCloud Scan
-        run: mvn -B verify sonar:sonar -Dsonar.projectKey=github-actions-terraform-aws -Dsonar.organization=rayudusubrahmanyam12 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=github-actions-terraform-aws  -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=$SONAR_TOKEN
+
+        #-Dsonar.organization=rayudusubrahmanyam12
         # uses: sonarsource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
