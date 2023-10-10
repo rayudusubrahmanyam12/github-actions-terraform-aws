@@ -55,7 +55,7 @@ jobs:
         run: terraform init
         working-directory: ${{ env.working-directory }}
         env:
-          TF_CLI_ARGS_init: "-backend-config=role_arn=arn:aws:iam::389028963485:role/my-github-actions-role -upgrade -reconfigure"
+          TF_CLI_ARGS_init: "-backend-config=role_arn=arn:aws:iam::886538946690:role/my-github-actions-role -upgrade -reconfigure"
           TF_VAR_assume_role: "my-github-actions-role"
 
       - name: Terraform validate
@@ -124,7 +124,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-region: ap-south-1
-          role-to-assume: arn:aws:iam::389028963485:role/my-github-actions-role
+          role-to-assume: arn:aws:iam::886538946690:role/my-github-actions-role
           role-duration-seconds: 960
           role-skip-session-tagging: true 
 
